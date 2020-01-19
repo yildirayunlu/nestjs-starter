@@ -10,12 +10,12 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-    ) {}
+  ) {}
 
   async validateUser(email: string, password: string): Promise<User> {
     const user = await this.userService.findOneByEmail(email);
     if (!user) {
-      return undefined
+      return undefined;
     }
 
     // check password
@@ -28,7 +28,11 @@ export class AuthService {
 
   async login(user: User) {
     return {
-      access_token: await this.jwtService.signAsync({ id: user.id, email: user.email }),
+      accessToken: await this.jwtService.signAsync({
+        id: user.id,
+        email: user.email,
+        roles: user.roles,
+      }),
     };
   }
 }

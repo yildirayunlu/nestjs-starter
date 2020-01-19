@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BeforeInsert,
+} from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 import * as crypto from 'crypto';
 
@@ -14,6 +21,9 @@ export class User {
   @IsNotEmpty()
   @Column()
   password: string;
+
+  @Column({ type: 'simple-json' })
+  roles: string[];
 
   @BeforeInsert()
   hashPassword() {
