@@ -20,9 +20,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format:ts": "prettier --write 'src/**/*.{ts,tsx}'",
     "format": "yarn run format:ts",
-    "format:check": "prettier -c 'src/**/*.{ts,tsx}'"
+    "format:check": "prettier -c 'src/**/*.{ts,tsx}'",
+    "lint": "yarn run lint:ts",
+    "lint:ts": "tsc && yarn lint:eslint",
+    "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
+    "format:ts": "prettier --write 'src/**/*.{ts,tsx}' && yarn lint:eslint --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,6 +43,8 @@
     ]
   },
   "devDependencies": {
+    "@atolye15/eslint-config": "^1.1.1",
+    "eslint": "^6.8.0",
     "prettier": "^1.19.1"
   }
 }
