@@ -5,9 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
-} from 'typeorm';
-import { IsNotEmpty } from 'class-validator';
-import * as crypto from 'crypto';
+} from "typeorm";
+import { IsNotEmpty } from "class-validator";
+import * as crypto from "crypto";
 
 @Entity()
 export class User {
@@ -22,12 +22,12 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ type: 'simple-json' })
+  @Column({ type: "simple-json" })
   roles: string[];
 
   @BeforeInsert()
   hashPassword() {
-    this.password = crypto.createHmac('sha256', this.password).digest('hex');
+    this.password = crypto.createHmac("sha256", this.password).digest("hex");
   }
 
   @CreateDateColumn()
