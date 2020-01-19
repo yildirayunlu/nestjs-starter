@@ -22,7 +22,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ type: "simple-json" })
+  @Column({ type: "simple-json", nullable: true })
   roles: string[];
 
   @BeforeInsert()
