@@ -1,8 +1,14 @@
 import React from 'react';
-import { Admin } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
+import { Admin, Resource } from 'react-admin';
+import crudProvider from '@fusionworks/ra-data-nest-crud';
 
-const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
-const App = () => <Admin dataProvider={dataProvider} />;
+import Users from './models/Users';
+
+const dataProvider = crudProvider('http://localhost:3000');
+const App = () => (
+  <Admin dataProvider={dataProvider}>
+    <Resource name="users" list={Users.List} create={Users.Create} edit={Users.Edit} />
+  </Admin>
+);
 
 export default App;

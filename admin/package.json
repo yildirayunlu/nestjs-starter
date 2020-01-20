@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fusionworks/ra-data-nest-crud": "^1.0.8",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -11,7 +12,6 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "prop-types": "^15.7.2",
-    "ra-data-json-server": "^3.1.2",
     "react": "^16.12.0",
     "react-admin": "^3.1.2",
     "react-dom": "^16.12.0",
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@atolye15/eslint-config": "^1.1.1",
+    "@atolye15/eslint-config-base-typescript": "^1.1.1",
     "eslint": "^6.8.0",
     "prettier": "^1.19.1"
   }

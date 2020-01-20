@@ -1,5 +1,0 @@
-{
-  "extends": [
-    "@atolye15/eslint-config"
-  ]
-}

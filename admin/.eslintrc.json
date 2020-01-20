@@ -1,0 +1,6 @@
+{
+  "extends": ["@atolye15/eslint-config"],
+  "rules": {
+    "react/jsx-props-no-spreading": "off"
+  }
+}
