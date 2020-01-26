@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   BeforeInsert,
 } from 'typeorm';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsEmail, Length } from 'class-validator';
 import * as crypto from 'crypto';
 
 @Entity()
@@ -15,10 +15,12 @@ export class User {
   id: number;
 
   @IsNotEmpty()
+  @IsEmail()
   @Column({ unique: true })
   email: string;
 
   @IsNotEmpty()
+  @Length(6, 32)
   @Column()
   password: string;
 
