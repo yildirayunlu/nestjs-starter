@@ -1,10 +1,14 @@
-import * as request from 'supertest';
-import { Test } from '@nestjs/testing';
-import { AppModule } from './../src/app.module';
 import { INestApplication } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from 'src/config/config.module';
-import { ConfigService } from 'src/config/config.service';
+import * as request from 'supertest';
+import { Test } from '@nestjs/testing';
+
+// modules
+import { AppModule } from './../src/app.module';
+import { ConfigModule } from './../src/config/config.module';
+
+// services
+import { ConfigService } from './../src/config/config.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -23,8 +27,14 @@ describe('AppController (e2e)', () => {
             password: configService.get('TYPEORM_PASSWORD'),
             database: configService.get('TYPEORM_DATABASE'),
             entities: ['dist/**/**.entity.js'],
-            synchronize: true,
-            dropSchema: true,
+            synchronize:
+              configService.get('TYPEORM_SYNCHRONIZE') === 'true'
+                ? true
+                : false,
+            dropSchema:
+              configService.get('TYPEORM_DROP_SCHEMA') === 'true'
+                ? true
+                : false,
           }),
         }),
         AppModule,
