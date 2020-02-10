@@ -390,4 +390,5 @@ Temporary Items
 docker-compose.yml
 .env
 .env.prod
+.env.test
 dist
