@@ -13,15 +13,12 @@ export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor() {
-    // TODO: Refactor find .env file path
     let filePath = '.env';
-    let folder = '../../';
-
     if (process.env.NODE_ENV === 'test') {
       filePath = '.env.test';
-      folder = '../../';
     }
-    const envFile = path.resolve(__dirname, folder, filePath);
+
+    const envFile = path.resolve(__dirname, '../../', filePath);
     this.envConfig = dotenv.parse(fs.readFileSync(envFile));
   }
 
