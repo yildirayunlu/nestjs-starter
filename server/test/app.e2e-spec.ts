@@ -7,8 +7,8 @@ import { Test } from '@nestjs/testing';
 import { AppModule } from './../src/app.module';
 import { ConfigModule } from './../src/config/config.module';
 
-// services
-import { ConfigService } from './../src/config/config.service';
+// factories
+import { TypeOrmConfigService } from './factories/database.factory';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -16,26 +16,10 @@ describe('AppController (e2e)', () => {
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
       imports: [
+        ConfigModule,
         TypeOrmModule.forRootAsync({
           imports: [ConfigModule],
-          inject: [ConfigService],
-          useFactory: async (configService: ConfigService) => ({
-            type: configService.get('TYPEORM_CONNECTION') as any,
-            host: configService.get('TYPEORM_HOST'),
-            port: Number(configService.get('TYPEORM_PORT')),
-            username: configService.get('TYPEORM_USERNAME'),
-            password: configService.get('TYPEORM_PASSWORD'),
-            database: configService.get('TYPEORM_DATABASE'),
-            entities: ['dist/**/**.entity.js'],
-            synchronize:
-              configService.get('TYPEORM_SYNCHRONIZE') === 'true'
-                ? true
-                : false,
-            dropSchema:
-              configService.get('TYPEORM_DROP_SCHEMA') === 'true'
-                ? true
-                : false,
-          }),
+          useClass: TypeOrmConfigService,
         }),
         AppModule,
       ],
