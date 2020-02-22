@@ -10,6 +10,25 @@ export class UserService extends TypeOrmCrudService<User> {
     super(repo);
   }
 
+  /**
+   * create user
+   */
+  async createUser(
+    email: string,
+    password: string,
+    roles?: ['admin' | 'member'],
+  ): Promise<User> {
+    const user = new User();
+    user.email = email;
+    user.plainPassword = password;
+    user.roles = roles;
+
+    return this.repo.save(user);
+  }
+
+  /**
+   * find user by email address
+   */
   async findOneByEmail(email: string): Promise<User> {
     return this.repo.findOne({ where: { email } });
   }
