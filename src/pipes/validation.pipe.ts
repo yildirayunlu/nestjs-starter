@@ -5,6 +5,10 @@ import {
 } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
 
+/**
+ * Use ValidationPipe
+ * @deprecated
+ */
 export class FormValidationPipe extends ValidationPipe {
   public async transform(value, metadata: ArgumentMetadata) {
     try {
