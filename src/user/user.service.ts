@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { Repository } from 'typeorm';
 
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService extends TypeOrmCrudService<User> {
-  constructor(@InjectRepository(User) repo) {
+  constructor(@InjectRepository(User) public readonly repo: Repository<User>) {
     super(repo);
   }
 
@@ -31,5 +32,12 @@ export class UserService extends TypeOrmCrudService<User> {
    */
   async findOneByEmail(email: string): Promise<User> {
     return this.repo.findOne({ where: { email } });
+  }
+
+  /**
+   * find user by id address
+   */
+  async findOneById(id: number): Promise<User> {
+    return this.repo.findOne({ where: { id } });
   }
 }

@@ -1,5 +1,11 @@
-import { Controller } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import {
+  Controller,
+  UseGuards,
+  Get,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 // entities
 import { User } from './user.entity';
@@ -7,12 +13,14 @@ import { User } from './user.entity';
 // services
 import { UserService } from './user.service';
 
-@Crud({
-  model: {
-    type: User,
-  },
-})
+@UseGuards(AuthGuard('jwt'))
 @Controller('users')
-export class UserController implements CrudController<User> {
+@UseInterceptors(ClassSerializerInterceptor)
+export class UserController {
   constructor(public service: UserService) {}
+
+  @Get()
+  async list(): Promise<User[]> {
+    return this.service.repo.find();
+  }
 }
