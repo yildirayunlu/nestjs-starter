@@ -55,6 +55,7 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
+  @ApiUnauthorizedResponse()
   @ApiOkResponse({
     type: User,
   })
