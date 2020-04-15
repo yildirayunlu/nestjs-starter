@@ -10,7 +10,7 @@ import { ApiTags, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 
 import { User } from './user.entity';
 import { UserService } from './user.service';
-import { ApiUnauthorizedResponse } from '../auth/decorators';
+import { ApiUnauthorizedResponse } from '../decorators';
 
 @ApiTags('user')
 @UseGuards(AuthGuard('jwt'))
