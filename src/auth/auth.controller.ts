@@ -16,7 +16,8 @@ import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
 import { User } from '../user/user.entity';
 import { RegisterDto, LoginDto } from './dto';
-import { ApiUnauthorizedResponse } from '../decorators';
+import { ApiUnauthorizedResponse } from '../decorators/ApiResponse';
+import { Roles } from '../decorators/roles.decorator';
 
 @ApiTags('auth')
 @Controller('auth')
