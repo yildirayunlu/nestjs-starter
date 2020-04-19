@@ -2,18 +2,17 @@ import { INestApplication } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
+import { useSeeding, runSeeder, useRefreshDatabase } from 'typeorm-seeding';
 
-// modules
 import { AppModule } from './../src/app.module';
 import { ConfigModule } from './../src/config/config.module';
-
-// factories
-import { TypeOrmConfigService } from './factories/database.factory';
+import CreatePosts from './../src/database/seeds/create-post.seed';
+import { TypeOrmConfigService } from './../src/factories/database.factory';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeAll(async () => {
+  beforeAll(async done => {
     const moduleFixture = await Test.createTestingModule({
       imports: [
         ConfigModule,
@@ -27,6 +26,17 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
+
+    await useSeeding();
+    await useRefreshDatabase();
+
+    await runSeeder(CreatePosts);
+    done();
+  });
+
+  afterAll(async done => {
+    await useRefreshDatabase();
+    done();
   });
 
   it('/ (GET)', () => {

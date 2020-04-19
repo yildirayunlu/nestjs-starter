@@ -5,8 +5,8 @@ import { Post } from '../../post/post.entity';
 
 define(Post, (faker: typeof Faker) => {
   const post = new Post();
-  post.title = faker.lorem.text();
-  post.content = faker.lorem.paragraphs(3);
+  post.title = faker.lorem.sentence();
+  post.content = faker.lorem.paragraph();
 
   return post;
 });
