@@ -13,10 +13,10 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
-import { UserService } from '../user/user.service';
-import { User } from '../user/user.entity';
+import { UserService } from '@/user/user.service';
+import { User } from '@/user/user.entity';
 import { RegisterDto, LoginDto } from './dto';
-import { ApiUnauthorizedResponse } from '../decorators/ApiResponse';
+import { ApiUnauthorizedResponse } from '@/decorators/ApiResponse';
 
 @ApiTags('auth')
 @Controller('auth')
