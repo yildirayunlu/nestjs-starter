@@ -1,13 +1,13 @@
 import { INestApplication } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as request from 'supertest';
+import { ConfigModule } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
 import { useSeeding, runSeeder, useRefreshDatabase } from 'typeorm-seeding';
+import * as request from 'supertest';
 
-import { AppModule } from './../src/app.module';
-import { ConfigModule } from './../src/config/config.module';
-import CreatePosts from './../src/database/seeds/create-post.seed';
-import { TypeOrmConfigService } from './../src/factories/database.factory';
+import { TypeOrmConfigService } from './factories/database.factory';
+import { AppModule } from '../src/app.module';
+import CreatePosts from '../src/database/seeds/create-post.seed';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -15,7 +15,9 @@ describe('AppController (e2e)', () => {
   beforeAll(async done => {
     const moduleFixture = await Test.createTestingModule({
       imports: [
-        ConfigModule,
+        ConfigModule.forRoot({
+          envFilePath: '.env.test',
+        }),
         TypeOrmModule.forRootAsync({
           imports: [ConfigModule],
           useClass: TypeOrmConfigService,
