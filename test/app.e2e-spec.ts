@@ -2,12 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
+import { ConfigModule } from '@nestjs/config';
 
-// modules
 import { AppModule } from './../src/app.module';
-import { ConfigModule } from './../src/config/config.module';
-
-// factories
 import { TypeOrmConfigService } from './factories/database.factory';
 
 describe('AppController (e2e)', () => {
@@ -16,7 +13,9 @@ describe('AppController (e2e)', () => {
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
       imports: [
-        ConfigModule,
+        ConfigModule.forRoot({
+          envFilePath: '.env.test',
+        }),
         TypeOrmModule.forRootAsync({
           imports: [ConfigModule],
           useClass: TypeOrmConfigService,
