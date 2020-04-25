@@ -1,9 +1,9 @@
 import { INestApplication } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { useSeeding, runSeeder, useRefreshDatabase } from 'typeorm-seeding';
 import { ConfigModule } from '@nestjs/config';
+import * as request from 'supertest';
 
 import CreatePosts from '../src/database/seeds/create-post.seed';
 import { AppModule } from '../src/app.module';
