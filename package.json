@@ -8,9 +8,9 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start": "node -r tsconfig-paths/register -r ts-node/register node_modules/.bin/nest start",
+    "start:dev": "node -r tsconfig-paths/register -r ts-node/register node_modules/.bin/nest start --watch",
+    "start:debug": "node -r tsconfig-paths/register -r ts-node/register node_modules/.bin/nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint '{src,test}/**/*.ts' --fix",
     "test": "jest",
@@ -80,6 +80,9 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "moduleNameMapper": {
+      "^@[/](.*)$": "<rootDir>/../src/$1"
+    },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
