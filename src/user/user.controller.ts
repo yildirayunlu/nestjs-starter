@@ -1,31 +1,15 @@
-import {
-  Controller,
-  UseGuards,
-  Get,
-  UseInterceptors,
-  ClassSerializerInterceptor,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { ApiTags, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
+import { Controller } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
 
 import { User } from './user.entity';
 import { UserService } from './user.service';
-import { ApiUnauthorizedResponse } from '@/decorators/ApiResponse';
 
-@ApiTags('user')
-@UseGuards(AuthGuard('jwt'))
+@Crud({
+  model: {
+    type: User,
+  },
+})
 @Controller('users')
-@UseInterceptors(ClassSerializerInterceptor)
-export class UserController {
+export class UserController implements CrudController<User> {
   constructor(public service: UserService) {}
-
-  @ApiBearerAuth()
-  @ApiOkResponse({
-    type: [User],
-  })
-  @ApiUnauthorizedResponse()
-  @Get()
-  async list(): Promise<User[]> {
-    return this.service.repo.find();
-  }
 }
