@@ -9,6 +9,7 @@ import * as request from 'supertest';
 
 import { createApp } from './utils/App';
 import CreatePosts from '../src/database/seeds/create-post.seed';
+import { HomeSchema } from './schema';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -29,10 +30,12 @@ describe('AppController (e2e)', () => {
     done();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/ (GET)', async done => {
+    const response = await request(app.getHttpServer()).get('/');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toMatchSchema(HomeSchema);
+
+    return done();
   });
 });
