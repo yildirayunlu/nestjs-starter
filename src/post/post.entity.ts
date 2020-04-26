@@ -35,11 +35,9 @@ export class Post {
   })
   user: User;
 
-  @Exclude()
   @CreateDateColumn()
   createdAt?: Date;
 
-  @Exclude()
   @UpdateDateColumn()
   updatedAt?: Date;
 }

@@ -8,6 +8,13 @@ import { PostService } from './post.service';
   model: {
     type: Post,
   },
+  query: {
+    join: {
+      user: {
+        eager: true,
+      },
+    },
+  },
 })
 @Controller('posts')
 export class PostController implements CrudController<Post> {
