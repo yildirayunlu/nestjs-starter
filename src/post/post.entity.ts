@@ -4,10 +4,13 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+
+import { User } from '@/user/user.entity';
 
 @Entity()
 export class Post {
@@ -26,6 +29,11 @@ export class Post {
     nullable: true,
   })
   content?: string;
+
+  @ManyToOne(type => User, user => user.posts, {
+    eager: true,
+  })
+  user: User;
 
   @Exclude()
   @CreateDateColumn()

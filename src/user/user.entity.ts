@@ -5,12 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  OneToMany,
 } from 'typeorm';
 import { IsNotEmpty, IsEmail, Length } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import * as crypto from 'crypto';
 import { ApiProperty } from '@nestjs/swagger';
 
+import { Post } from '@/post/post.entity';
 @Entity()
 export class User {
   @ApiProperty()
@@ -42,6 +44,9 @@ export class User {
       .createHmac('sha256', this.plainPassword)
       .digest('hex');
   }
+
+  @OneToMany(type => Post, post => post.user)
+  posts?: Post[];
 
   @Exclude()
   @CreateDateColumn()
