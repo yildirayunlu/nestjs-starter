@@ -2,8 +2,6 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
   BeforeInsert,
   OneToMany,
 } from 'typeorm';
@@ -12,8 +10,9 @@ import { Exclude } from 'class-transformer';
 import * as crypto from 'crypto';
 
 import { Post } from '@/post/entities/post.entity';
+import { BaseEntity } from '@/database/base.entity';
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -43,12 +42,4 @@ export class User {
 
   @OneToMany(() => Post, post => post.user)
   posts?: Post[];
-
-  @Exclude()
-  @CreateDateColumn()
-  createdAt?: Date;
-
-  @Exclude()
-  @UpdateDateColumn()
-  updatedAt?: Date;
 }

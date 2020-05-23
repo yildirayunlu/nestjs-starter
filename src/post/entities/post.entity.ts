@@ -1,17 +1,11 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  ManyToOne,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 
 import { User } from '@/user/entities/user.entity';
+import { BaseEntity } from '@/database/base.entity';
 
 @Entity()
-export class Post {
+export class Post extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -29,10 +23,4 @@ export class Post {
     eager: true,
   })
   user: User;
-
-  @CreateDateColumn()
-  createdAt?: Date;
-
-  @UpdateDateColumn()
-  updatedAt?: Date;
 }
