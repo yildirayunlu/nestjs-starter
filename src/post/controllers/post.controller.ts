@@ -9,11 +9,25 @@ import { PostService } from '@/post/services/post.service';
     type: Post,
   },
   query: {
+    alwaysPaginate: true,
     join: {
       user: {
         eager: true,
       },
+      comments: {
+        eager: true,
+      },
+      'comments.user': {
+        eager: true,
+        alias: 'comment_user',
+      },
     },
+    sort: [
+      {
+        field: 'id',
+        order: 'DESC',
+      },
+    ],
   },
 })
 @Controller('posts')

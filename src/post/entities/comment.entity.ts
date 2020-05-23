@@ -1,38 +1,27 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 
 import { User } from '@/user/entities/user.entity';
-import { Comment } from '@/post/entities/comment.entity';
 import { BaseEntity } from '@/database/base.entity';
+import { Post } from '@/post/entities/post.entity';
 
 @Entity()
-export class Post extends BaseEntity {
+export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @IsNotEmpty()
-  @Column()
-  title: string;
-
   @Column({
     type: 'longtext',
     nullable: true,
   })
-  content?: string;
+  comment?: string;
 
   @ManyToOne(() => User, user => user.posts, {
     eager: true,
   })
   user: User;
 
-  @OneToMany(() => Comment, comment => comment.post, {
-    eager: true,
-  })
-  comments?: Comment[];
+  @ManyToOne(() => Post, post => post.comments)
+  post: Post;
 }
