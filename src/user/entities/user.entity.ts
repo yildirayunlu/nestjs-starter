@@ -2,22 +2,20 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
   BeforeInsert,
+  OneToMany,
 } from 'typeorm';
 import { IsNotEmpty, IsEmail, Length } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import * as crypto from 'crypto';
-import { ApiProperty } from '@nestjs/swagger';
 
+import { Post } from '@/post/entities/post.entity';
+import { BaseEntity } from '@/database/base.entity';
 @Entity()
-export class User {
-  @ApiProperty()
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
   @Column({ unique: true })
@@ -32,7 +30,6 @@ export class User {
   @Length(6, 32)
   plainPassword: string;
 
-  @ApiProperty()
   @Column({ type: 'simple-json', nullable: true })
   roles: string[];
 
@@ -43,11 +40,6 @@ export class User {
       .digest('hex');
   }
 
-  @Exclude()
-  @CreateDateColumn()
-  createdAt?: Date;
-
-  @Exclude()
-  @UpdateDateColumn()
-  updatedAt?: Date;
+  @OneToMany(() => Post, post => post.user)
+  posts?: Post[];
 }
