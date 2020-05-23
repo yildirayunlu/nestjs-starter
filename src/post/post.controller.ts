@@ -1,8 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 
-import { Post } from './post.entity';
-import { PostService } from './post.service';
+import { Post } from '@/post/post.entity';
+import { PostService } from '@/post/post.service';
 
 @Crud({
   model: {
