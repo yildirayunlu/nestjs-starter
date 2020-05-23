@@ -34,6 +34,7 @@
     "@nestjsx/crud-typeorm": "^4.4.2",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
+    "dayjs": "^1.8.27",
     "mysql": "^2.17.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
