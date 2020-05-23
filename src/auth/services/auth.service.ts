@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto';
 import { JwtService } from '@nestjs/jwt';
+import { serialize } from 'class-transformer';
 
-import { UserService } from '@/user/services/user.service';
+import { UserService } from '@/user/user.service';
 import { User } from '@/user/entities/user.entity';
 
 @Injectable()
@@ -33,6 +34,7 @@ export class AuthService {
         email: user.email,
         roles: user.roles,
       }),
+      user: JSON.parse(serialize(user)),
     };
   }
 }
