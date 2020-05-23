@@ -1,7 +1,7 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 
-import { User } from '@/user/user.entity';
-import { Post } from '@/post/post.entity';
+import { User } from '@/user/entities/user.entity';
+import { Post } from '@/post/entities/post.entity';
 
 export default class Users implements Seeder {
   public async run(factory: Factory) {

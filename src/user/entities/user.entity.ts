@@ -11,7 +11,7 @@ import { IsNotEmpty, IsEmail, Length } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import * as crypto from 'crypto';
 
-import { Post } from '@/post/post.entity';
+import { Post } from '@/post/entities/post.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()

@@ -2,7 +2,7 @@ import * as Faker from 'faker';
 import { define } from 'typeorm-seeding';
 import * as crypto from 'crypto';
 
-import { User } from '@/user/user.entity';
+import { User } from '@/user/entities/user.entity';
 
 define(User, (faker: typeof Faker) => {
   const user = new User();
