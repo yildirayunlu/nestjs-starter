@@ -10,11 +10,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from '@/auth/services/auth.service';
 import { UserService } from '@/user/services/user.service';
 import { RegisterDto, LoginDto } from '@/auth/dto';
 
+@ApiTags('auth')
 @Controller('auth')
 @UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
@@ -33,7 +35,7 @@ export class AuthController {
   async register(@Body() registerDto: RegisterDto) {
     const { email, password } = registerDto;
 
-    return this.userService.createUser(email, password, ['admin']);
+    return this.userService.createUser(email, password, ['user']);
   }
 
   @UseGuards(AuthGuard('jwt'))

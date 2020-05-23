@@ -17,7 +17,7 @@ export class UserService extends TypeOrmCrudService<User> {
   async createUser(
     email: string,
     password: string,
-    roles?: ['admin' | 'member'],
+    roles?: ['admin' | 'user'],
   ): Promise<User> {
     const user = new User();
     user.email = email;
