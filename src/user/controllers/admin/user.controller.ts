@@ -13,8 +13,8 @@ import { UserService } from '@/user/services/user.service';
     exclude: ['createManyBase', 'replaceOneBase'],
   },
 })
-@Controller('users')
-@ApiTags('users')
-export class UserController implements CrudController<User> {
+@Controller('admin/users')
+@ApiTags('admin-users')
+export class AdminUserController implements CrudController<User> {
   constructor(public service: UserService) {}
 }

@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 import { Comment } from '@/post/entities/comment.entity';
 import { CommentService } from '@/post/services/comment.service';
@@ -32,8 +32,9 @@ import { CreateDto, UpdateDto } from '@/post/dto/Comment';
     exclude: ['createManyBase', 'replaceOneBase'],
   },
 })
-@Controller('comments')
-@ApiTags('comments')
-export class CommentController implements CrudController<Comment> {
+@ApiBearerAuth()
+@Controller('admin/comments')
+@ApiTags('admin-comments')
+export class AdminCommentController implements CrudController<Comment> {
   constructor(public service: CommentService) {}
 }
