@@ -1,12 +1,18 @@
 import { Controller } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
+import { ApiTags } from '@nestjs/swagger';
 
 import { Comment } from '@/post/entities/comment.entity';
 import { CommentService } from '@/post/services/comment.service';
+import { CreateDto, UpdateDto } from '@/post/dto/Comment';
 
 @Crud({
   model: {
     type: Comment,
+  },
+  dto: {
+    create: CreateDto,
+    update: UpdateDto,
   },
   query: {
     alwaysPaginate: true,
@@ -22,8 +28,12 @@ import { CommentService } from '@/post/services/comment.service';
       },
     ],
   },
+  routes: {
+    exclude: ['createManyBase', 'replaceOneBase'],
+  },
 })
 @Controller('comments')
+@ApiTags('comments')
 export class CommentController implements CrudController<Comment> {
   constructor(public service: CommentService) {}
 }
