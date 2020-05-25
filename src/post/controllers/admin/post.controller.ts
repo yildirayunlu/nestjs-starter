@@ -1,9 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
+import { Roles } from '@/decorators/roles.decorator';
+import { RolesGuard } from '@/guards/roles.guard';
 import { Post } from '@/post/entities/post.entity';
 import { PostService } from '@/post/services/post.service';
+import { RolesEnum } from '@/enums/roles.enum';
 import {
   PostCreateDto,
   PostUpdateDto,
@@ -11,6 +15,9 @@ import {
   PostDto,
 } from '@/post/controllers/admin/dto/Post';
 
+@ApiBearerAuth()
+@ApiTags('admin-posts')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 @Crud({
   model: {
     type: Post,
@@ -42,6 +49,18 @@ import {
   },
   routes: {
     exclude: ['createManyBase', 'replaceOneBase'],
+    getManyBase: {
+      decorators: [Roles(RolesEnum.ADMIN)],
+    },
+    getOneBase: {
+      decorators: [Roles(RolesEnum.ADMIN)],
+    },
+    createOneBase: {
+      decorators: [Roles(RolesEnum.ADMIN)],
+    },
+    deleteOneBase: {
+      decorators: [Roles(RolesEnum.ADMIN)],
+    },
   },
   serialize: {
     getMany: PostListDto,
@@ -49,9 +68,7 @@ import {
     update: PostDto,
   },
 })
-@ApiBearerAuth()
 @Controller('admin/posts')
-@ApiTags('admin-posts')
 export class AdminPostController implements CrudController<Post> {
   constructor(public service: PostService) {}
 }

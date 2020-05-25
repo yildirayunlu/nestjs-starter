@@ -33,6 +33,7 @@ export class Post extends BaseEntity {
 
   @OneToMany(() => Comment, comment => comment.post, {
     eager: true,
+    cascade: true,
   })
   comments?: Comment[];
 }

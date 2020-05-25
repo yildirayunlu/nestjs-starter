@@ -11,7 +11,6 @@ export const AdminUserSchema = {
   },
   required: [
     'id',
-    'title',
     'firstName',
     'lastName',
     'email',

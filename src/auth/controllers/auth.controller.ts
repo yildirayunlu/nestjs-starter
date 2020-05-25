@@ -9,6 +9,7 @@ import {
   Get,
   UnauthorizedException,
   BadRequestException,
+  HttpCode,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
@@ -26,12 +27,14 @@ export class AuthController {
     readonly userService: UserService,
   ) {}
 
+  @HttpCode(200)
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Request() req) {
     return this.authService.login(req.user);
   }
 
+  @HttpCode(200)
   @Post('register')
   async register(@Body() registerDto: RegisterDto) {
     const { email, password } = registerDto;
