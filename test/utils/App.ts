@@ -3,9 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Test } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 
-import { AppModule } from '../../src/app.module';
-import { UserModule } from '../../src/user/user.module';
-import { AuthModule } from '../../src/auth/auth.module';
+import { AppModule } from '@/app.module';
+import { UserModule } from '@/user/user.module';
+import { AuthModule } from '@/auth/auth.module';
+import { PostModule } from '@/post/post.module';
 import { TypeOrmConfigService } from '../factories/database.factory';
 
 export const createApp = async () => {
@@ -21,6 +22,7 @@ export const createApp = async () => {
       AppModule,
       UserModule,
       AuthModule,
+      PostModule,
     ],
   }).compile();
 
