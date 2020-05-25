@@ -6,7 +6,6 @@ import {
   OneToMany,
 } from 'typeorm';
 import { IsNotEmpty, IsEmail, Length } from 'class-validator';
-import { Exclude } from 'class-transformer';
 import * as crypto from 'crypto';
 
 import { Post } from '@/post/entities/post.entity';
@@ -17,16 +16,22 @@ export class User extends BaseEntity {
   id: number;
 
   @IsNotEmpty()
+  @Column()
+  firstName: string;
+
+  @IsNotEmpty()
+  @Column()
+  lastName: string;
+
+  @IsNotEmpty()
   @IsEmail()
   @Column({ unique: true })
   email: string;
 
-  @Exclude()
   @IsNotEmpty()
   @Column()
   password: string;
 
-  @Exclude()
   @Length(6, 32)
   plainPassword: string;
 

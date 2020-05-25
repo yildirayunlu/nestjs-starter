@@ -4,15 +4,20 @@ import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 import { Post } from '@/post/entities/post.entity';
 import { PostService } from '@/post/services/post.service';
-import { CreateDto, UpdateDto } from '@/post/dto/Post';
+import {
+  PostCreateDto,
+  PostUpdateDto,
+  PostListDto,
+  PostDto,
+} from '@/post/controllers/admin/dto/Post';
 
 @Crud({
   model: {
     type: Post,
   },
   dto: {
-    create: CreateDto,
-    update: UpdateDto,
+    create: PostCreateDto,
+    update: PostUpdateDto,
   },
   query: {
     alwaysPaginate: true,
@@ -37,6 +42,11 @@ import { CreateDto, UpdateDto } from '@/post/dto/Post';
   },
   routes: {
     exclude: ['createManyBase', 'replaceOneBase'],
+  },
+  serialize: {
+    getMany: PostListDto,
+    create: PostDto,
+    update: PostDto,
   },
 })
 @ApiBearerAuth()

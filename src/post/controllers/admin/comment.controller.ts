@@ -4,7 +4,7 @@ import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 import { Comment } from '@/post/entities/comment.entity';
 import { CommentService } from '@/post/services/comment.service';
-import { CreateDto, UpdateDto } from '@/post/dto/Comment';
+import { CreateDto, UpdateDto } from '@/post/controllers/admin/dto/Comment';
 
 @Crud({
   model: {
