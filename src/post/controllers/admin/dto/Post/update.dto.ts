@@ -1,25 +1,26 @@
-import { IsNotEmpty, IsNumber, ValidateNested } from 'class-validator';
+import { IsOptional, IsNumber, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
-class PostUserDto {
+class PostUpdateUserDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   readonly id: number;
 }
 
 export class PostUpdateDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   readonly title: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   readonly content: string;
 
   @ApiProperty()
-  @Type(() => PostUserDto)
+  @IsOptional()
+  @Type(() => PostUpdateUserDto)
   @ValidateNested()
-  readonly user: PostUserDto;
+  readonly user: PostUpdateUserDto;
 }

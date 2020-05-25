@@ -1,5 +1,6 @@
 import { Expose, Exclude, Type } from 'class-transformer';
 
+import { PostDto } from '@/post/controllers/admin/dto/Post';
 import { UserDto } from '@/user/controllers/admin/dto';
 
 @Exclude()
@@ -12,7 +13,11 @@ export class CommentDto {
 
   @Expose()
   @Type(() => UserDto)
-  user: UserDto[];
+  user: UserDto;
+
+  @Expose()
+  @Type(() => PostDto)
+  post: PostDto;
 
   @Expose()
   createdAt: string;

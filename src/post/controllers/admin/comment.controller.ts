@@ -4,20 +4,28 @@ import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 import { Comment } from '@/post/entities/comment.entity';
 import { CommentService } from '@/post/services/comment.service';
-import { CreateDto, UpdateDto } from '@/post/controllers/admin/dto/Comment';
+import {
+  CommentCreateDto,
+  CommentUpdateDto,
+  CommentListDto,
+  CommentDto,
+} from '@/post/controllers/admin/dto/Comment';
 
 @Crud({
   model: {
     type: Comment,
   },
   dto: {
-    create: CreateDto,
-    update: UpdateDto,
+    create: CommentCreateDto,
+    update: CommentUpdateDto,
   },
   query: {
     alwaysPaginate: true,
     join: {
       post: {
+        eager: true,
+      },
+      user: {
         eager: true,
       },
     },
@@ -30,6 +38,11 @@ import { CreateDto, UpdateDto } from '@/post/controllers/admin/dto/Comment';
   },
   routes: {
     exclude: ['createManyBase', 'replaceOneBase'],
+  },
+  serialize: {
+    getMany: CommentListDto,
+    create: CommentDto,
+    update: CommentDto,
   },
 })
 @ApiBearerAuth()

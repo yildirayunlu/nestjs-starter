@@ -9,6 +9,7 @@ import { IsNotEmpty, IsEmail, Length } from 'class-validator';
 import * as crypto from 'crypto';
 
 import { Post } from '@/post/entities/post.entity';
+import { Comment } from '@/post/entities/comment.entity';
 import { BaseEntity } from '@/database/base.entity';
 @Entity()
 export class User extends BaseEntity {
@@ -47,4 +48,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Post, post => post.user)
   posts?: Post[];
+
+  @OneToMany(() => Comment, comment => comment.user)
+  comments?: Comment[];
 }
