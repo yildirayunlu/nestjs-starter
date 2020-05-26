@@ -48,7 +48,7 @@ export class PostListDto {
     name: 'items',
   })
   @Type(() => PostDto)
-  posts: PostDto[];
+  data: PostDto[];
 
   @Expose({
     name: 'meta',

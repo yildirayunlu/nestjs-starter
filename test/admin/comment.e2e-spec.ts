@@ -9,7 +9,7 @@ import * as request from 'supertest';
 
 import DataSeed from '@/database/seeds/data.seed';
 import { createApp } from '../utils/App';
-import { paginated, AdminCommentSchema } from '../schema';
+import { paginatedAdmin, AdminCommentSchema } from '../schema';
 import { loginUser } from '../utils/User';
 
 describe('AdminCommentController (e2e)', () => {
@@ -55,7 +55,7 @@ describe('AdminCommentController (e2e)', () => {
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      expect(body).toMatchSchema(paginated(AdminCommentSchema));
+      expect(body).toMatchSchema(paginatedAdmin(AdminCommentSchema));
 
       return done();
     });
