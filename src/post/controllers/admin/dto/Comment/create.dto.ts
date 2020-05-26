@@ -22,11 +22,13 @@ export class CommentCreateDto {
   readonly comment: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @Type(() => CommentCreateUserDto)
   @ValidateNested()
   readonly user: CommentCreateUserDto;
 
   @ApiProperty()
+  @IsNotEmpty()
   @Type(() => CommentCreatePostDto)
   @ValidateNested()
   readonly post: CommentCreatePostDto;
