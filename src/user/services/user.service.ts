@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import * as crypto from 'crypto';
 
 import { User } from '@/user/entities/user.entity';
 import { UserRepository } from '@/user/repositories/user.repository';
@@ -15,13 +16,17 @@ export class UserService extends TypeOrmCrudService<User> {
    * create user
    */
   async createUser(
+    firstName: string,
+    lastName: string,
     email: string,
     password: string,
-    roles?: ['admin' | 'member'],
+    roles?: ['user'],
   ): Promise<User> {
     const user = new User();
+    user.firstName = firstName;
+    user.lastName = lastName;
     user.email = email;
-    user.plainPassword = password;
+    user.password = crypto.createHmac('sha256', password).digest('hex');
     user.roles = roles;
 
     return this.repo.save(user);
