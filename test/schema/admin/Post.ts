@@ -1,5 +1,4 @@
 import { AdminUserSchema } from './User';
-import { AdminCommentSchema } from './Comment';
 
 export const AdminPostSchema = {
   type: 'object',
@@ -8,7 +7,17 @@ export const AdminPostSchema = {
     title: { type: 'string' },
     content: { type: 'string' },
     user: AdminUserSchema,
-    comments: { ...AdminCommentSchema, type: 'array' },
+    comments: {
+      type: 'array',
+      properties: {
+        id: { type: 'number' },
+        comment: { type: 'string' },
+        user: AdminUserSchema,
+        createdAt: { type: 'string' },
+        updatedAt: { type: 'string' },
+      },
+      required: ['id', 'comment', 'user', 'createdAt', 'updatedAt'],
+    },
     createdAt: { type: 'string' },
     updatedAt: { type: 'string' },
   },

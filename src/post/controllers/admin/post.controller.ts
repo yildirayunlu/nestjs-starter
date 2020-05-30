@@ -9,10 +9,10 @@ import { Post } from '@/post/entities/post.entity';
 import { PostService } from '@/post/services/post.service';
 import { RolesEnum } from '@/enums/roles.enum';
 import {
-  PostCreateDto,
-  PostUpdateDto,
-  PostListDto,
-  PostDto,
+  AdminPostCreateDto,
+  AdminPostUpdateDto,
+  AdminPostGetManyDto,
+  AdminPostDto,
 } from '@/post/controllers/admin/dto/Post';
 
 @ApiBearerAuth()
@@ -23,8 +23,8 @@ import {
     type: Post,
   },
   dto: {
-    create: PostCreateDto,
-    update: PostUpdateDto,
+    create: AdminPostCreateDto,
+    update: AdminPostUpdateDto,
   },
   query: {
     alwaysPaginate: true,
@@ -63,9 +63,10 @@ import {
     },
   },
   serialize: {
-    getMany: PostListDto,
-    create: PostDto,
-    update: PostDto,
+    getMany: AdminPostGetManyDto,
+    create: AdminPostDto,
+    update: AdminPostDto,
+    get: AdminPostDto,
   },
 })
 @Controller('admin/posts')

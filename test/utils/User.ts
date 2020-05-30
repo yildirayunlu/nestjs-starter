@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 
-import { AuthSchema } from '../schema';
+import { AuthenticatedSchema } from '../schema';
 
 interface Data {
   email: string;
@@ -14,7 +14,7 @@ export const loginUser = async (app: INestApplication, payload: Data) => {
     .send(payload)
     .expect(200);
 
-  expect(body).toMatchSchema(AuthSchema);
+  expect(body).toMatchSchema(AuthenticatedSchema);
 
   return body;
 };

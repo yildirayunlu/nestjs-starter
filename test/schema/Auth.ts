@@ -1,12 +1,12 @@
-import { AdminUserSchema } from './admin';
+import { AuthenticatedUserSchema } from './User';
 
-export const AuthSchema = {
+export const AuthenticatedSchema = {
   type: 'object',
   properties: {
     token: { type: 'string' },
-    user: AdminUserSchema,
+    user: AuthenticatedUserSchema,
   },
   required: ['token', 'user'],
 };
 
-export default AuthSchema;
+export default AuthenticatedSchema;

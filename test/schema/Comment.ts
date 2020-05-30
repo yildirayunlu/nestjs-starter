@@ -1,4 +1,4 @@
-import UserSchema from './User';
+import { UserSchema } from './User';
 
 export const CommentSchema = {
   type: 'object',

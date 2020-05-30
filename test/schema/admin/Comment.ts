@@ -1,29 +1,11 @@
+import { AdminUserSchema } from './User';
+
 export const AdminCommentSchema = {
   type: 'object',
   properties: {
     id: { type: 'number' },
     comment: { type: 'string' },
-    user: {
-      type: 'object',
-      properties: {
-        id: { type: 'number' },
-        firstName: { type: 'string' },
-        lastName: { type: 'string' },
-        email: { type: 'string' },
-        roles: { type: 'array' },
-        createdAt: { type: 'string' },
-        updatedAt: { type: 'string' },
-      },
-      required: [
-        'id',
-        'firstName',
-        'lastName',
-        'email',
-        'roles',
-        'createdAt',
-        'updatedAt',
-      ],
-    },
+    user: AdminUserSchema,
     post: {
       type: 'object',
       properties: {
@@ -38,7 +20,7 @@ export const AdminCommentSchema = {
     createdAt: { type: 'string' },
     updatedAt: { type: 'string' },
   },
-  required: ['id', 'comment', 'user', 'createdAt', 'updatedAt'],
+  required: ['id', 'comment', 'user', 'post', 'createdAt', 'updatedAt'],
 };
 
 export default AdminCommentSchema;

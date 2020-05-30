@@ -3,9 +3,9 @@ import * as crypto from 'crypto';
 import { JwtService } from '@nestjs/jwt';
 import { plainToClass } from 'class-transformer';
 
-import { UserService } from '@/user/user.service';
+import { UserService } from '@/user/services/user.service';
 import { User } from '@/user/entities/user.entity';
-import { UserDto } from '@/user/controllers/admin/dto';
+import { AdminUserDto } from '@/user/controllers/admin/dto';
 
 @Injectable()
 export class AuthService {
@@ -35,7 +35,7 @@ export class AuthService {
         email: user.email,
         roles: user.roles,
       }),
-      user: plainToClass(UserDto, user),
+      user: plainToClass(AdminUserDto, user),
     };
   }
 }

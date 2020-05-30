@@ -9,10 +9,10 @@ import { RolesGuard } from '@/guards/roles.guard';
 import { Roles } from '@/decorators/roles.decorator';
 import { RolesEnum } from '@/enums/roles.enum';
 import {
-  CommentCreateDto,
-  CommentUpdateDto,
-  CommentListDto,
-  CommentDto,
+  AdminCommentCreateDto,
+  AdminCommentUpdateDto,
+  AdminCommentGetManyDto,
+  AdminCommentDto,
 } from '@/post/controllers/admin/dto/Comment';
 
 @ApiBearerAuth()
@@ -23,8 +23,8 @@ import {
     type: Comment,
   },
   dto: {
-    create: CommentCreateDto,
-    update: CommentUpdateDto,
+    create: AdminCommentCreateDto,
+    update: AdminCommentUpdateDto,
   },
   query: {
     alwaysPaginate: true,
@@ -59,9 +59,10 @@ import {
     },
   },
   serialize: {
-    getMany: CommentListDto,
-    create: CommentDto,
-    update: CommentDto,
+    getMany: AdminCommentGetManyDto,
+    create: AdminCommentDto,
+    update: AdminCommentDto,
+    get: AdminCommentDto,
   },
 })
 @Controller('admin/comments')

@@ -1,12 +1,5 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  BeforeInsert,
-  OneToMany,
-} from 'typeorm';
-import { IsNotEmpty, IsEmail, Length } from 'class-validator';
-import * as crypto from 'crypto';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { IsNotEmpty, IsEmail } from 'class-validator';
 
 import { Post } from '@/post/entities/post.entity';
 import { Comment } from '@/post/entities/comment.entity';
@@ -33,18 +26,8 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
-  @Length(6, 32)
-  plainPassword: string;
-
   @Column({ type: 'simple-json', nullable: true })
   roles: string[];
-
-  @BeforeInsert()
-  hashPlainPassword() {
-    this.password = crypto
-      .createHmac('sha256', this.plainPassword)
-      .digest('hex');
-  }
 
   @OneToMany(() => Post, post => post.user)
   posts?: Post[];

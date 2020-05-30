@@ -2,34 +2,34 @@ import { IsNumber, ValidateNested, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
-class CommentUpdateUserDto {
+class AdminCommentUpdateUserDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber()
   readonly id: number;
 }
 
-class CommentUpdatePostDto {
+class AdminCommentUpdatePostDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber()
   readonly id: number;
 }
 
-export class CommentUpdateDto {
+export class AdminCommentUpdateDto {
   @ApiProperty()
   @IsOptional()
   readonly comment: string;
 
   @ApiProperty()
   @IsOptional()
-  @Type(() => CommentUpdateUserDto)
+  @Type(() => AdminCommentUpdateUserDto)
   @ValidateNested()
-  readonly user: CommentUpdateUserDto;
+  readonly user: AdminCommentUpdateUserDto;
 
   @ApiProperty()
   @IsOptional()
-  @Type(() => CommentUpdatePostDto)
+  @Type(() => AdminCommentUpdatePostDto)
   @ValidateNested()
-  readonly post: CommentUpdatePostDto;
+  readonly post: AdminCommentUpdatePostDto;
 }

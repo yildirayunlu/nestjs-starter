@@ -2,34 +2,34 @@ import { IsNotEmpty, IsNumber, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
-class CommentCreateUserDto {
+class AdminCommentCreateUserDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   readonly id: number;
 }
 
-class CommentCreatePostDto {
+class AdminCommentCreatePostDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   readonly id: number;
 }
 
-export class CommentCreateDto {
+export class AdminCommentCreateDto {
   @ApiProperty()
   @IsNotEmpty()
   readonly comment: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @Type(() => CommentCreateUserDto)
+  @Type(() => AdminCommentCreateUserDto)
   @ValidateNested()
-  readonly user: CommentCreateUserDto;
+  readonly user: AdminCommentCreateUserDto;
 
   @ApiProperty()
   @IsNotEmpty()
-  @Type(() => CommentCreatePostDto)
+  @Type(() => AdminCommentCreatePostDto)
   @ValidateNested()
-  readonly post: CommentCreatePostDto;
+  readonly post: AdminCommentCreatePostDto;
 }

@@ -1,46 +1,36 @@
 import { Expose, Exclude, Type } from 'class-transformer';
 
-import { PostDto } from '@/post/controllers/admin/dto/Post';
-import { UserDto } from '@/user/controllers/admin/dto';
+import { AdminUserDto } from '@/user/controllers/admin/dto';
+import { AdminPostDto } from '@/post/controllers/admin/dto/Post';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Exclude()
-export class CommentDto {
+export class AdminCommentDto {
   @Expose()
+  @ApiProperty()
   id: number;
 
   @Expose()
+  @ApiProperty()
   comment: string;
 
   @Expose()
-  @Type(() => UserDto)
-  user: UserDto;
+  @Type(() => AdminUserDto)
+  @ApiProperty({
+    type: AdminUserDto,
+  })
+  user: AdminUserDto;
 
   @Expose()
-  @Type(() => PostDto)
-  post: PostDto;
+  @Type(() => AdminPostDto)
+  @ApiProperty({
+    type: AdminPostDto,
+  })
+  post: AdminPostDto;
 
   @Expose()
   createdAt: string;
 
   @Expose()
   updatedAt: string;
-}
-
-@Exclude()
-export class CommentListDto {
-  @Expose()
-  @Type(() => CommentDto)
-  data: CommentDto[];
-
-  @Expose()
-  count: number;
-
-  @Expose()
-  total: number;
-
-  @Expose()
-  page: number;
-
-  @Expose()
-  pageCount: number;
 }

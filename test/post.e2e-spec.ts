@@ -30,7 +30,7 @@ describe('PostController (e2e)', () => {
     await app.close();
   });
 
-  fdescribe('[GET] /posts', () => {
+  describe('[GET] /posts', () => {
     it('should response correctly', async done => {
       const { body } = await request(app.getHttpServer())
         .get('/posts')

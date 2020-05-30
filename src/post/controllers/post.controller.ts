@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { plainToClass } from 'class-transformer';
 
 import { PostService } from '@/post/services/post.service';
@@ -23,6 +23,10 @@ export class PostController {
     schema: {
       default: 20,
     },
+  })
+  @ApiResponse({
+    status: 200,
+    type: PostListDto,
   })
   @Get()
   async list(@Query('page') page = 1, @Query('limit') limit = 20) {

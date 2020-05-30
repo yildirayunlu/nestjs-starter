@@ -1,4 +1,5 @@
 import { Factory, Seeder } from 'typeorm-seeding';
+import * as crypto from 'crypto';
 
 import { User } from '@/user/entities/user.entity';
 import { Post } from '@/post/entities/post.entity';
@@ -6,11 +7,13 @@ import { Comment } from '@/post/entities/comment.entity';
 
 export default class Data implements Seeder {
   public async run(factory: Factory) {
+    const password = crypto.createHmac('sha256', 'password').digest('hex');
+
     // #### Users ####
     await factory(User)().create({
       id: 1,
       email: 'admin@mail.com',
-      plainPassword: 'password',
+      password,
       roles: ['admin'],
       posts: [],
     });
@@ -19,7 +22,7 @@ export default class Data implements Seeder {
     const user2 = await factory(User)().create({
       id: 2,
       email: 'test2@mail.com',
-      plainPassword: 'password',
+      password,
       roles: ['user'],
     });
 
@@ -27,7 +30,7 @@ export default class Data implements Seeder {
     const user3 = await factory(User)().create({
       id: 3,
       email: 'test3@mail.com',
-      plainPassword: 'password',
+      password,
       roles: ['user'],
     });
 
@@ -35,7 +38,7 @@ export default class Data implements Seeder {
     const user4 = await factory(User)().create({
       id: 4,
       email: 'test4@mail.com',
-      plainPassword: 'password',
+      password,
       roles: ['user'],
     });
 
