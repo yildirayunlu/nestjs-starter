@@ -65,4 +65,27 @@ describe('PostController (e2e)', () => {
       return done();
     });
   });
+
+  describe('[GET] /posts/{id}', () => {
+    it('should response correctly', async done => {
+      const { body } = await request(app.getHttpServer())
+        .get('/posts/1')
+        .expect(200);
+
+      expect(body).toMatchSchema(PostSchema);
+
+      return done();
+    });
+
+    it('should not found response', async done => {
+      const { body } = await request(app.getHttpServer())
+        .get('/posts/99')
+        .expect(404);
+
+      expect(body.statusCode).toBe(404);
+      expect(body.message).toBe('Post Not Found');
+
+      return done();
+    });
+  });
 });

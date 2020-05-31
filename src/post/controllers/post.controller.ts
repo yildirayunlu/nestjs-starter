@@ -1,9 +1,21 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Query,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiQuery,
+  ApiResponse,
+  ApiNotFoundResponse,
+} from '@nestjs/swagger';
 import { plainToClass } from 'class-transformer';
 
 import { PostService } from '@/post/services/post.service';
-import { PostListDto } from '@/post/controllers/dto';
+import { PostListDto, PostDetailDto } from '@/post/controllers/dto';
+import { ExceptionDto } from '@/dto';
 
 @Controller('posts')
 @ApiTags('posts')
@@ -37,5 +49,25 @@ export class PostController {
     });
 
     return plainToClass(PostListDto, data);
+  }
+
+  @ApiResponse({
+    status: 200,
+    type: PostListDto,
+  })
+  @ApiNotFoundResponse({
+    status: 404,
+    type: ExceptionDto,
+    description: 'Post Not Found',
+  })
+  @Get(':id')
+  async detail(@Param('id') id: number) {
+    const post = await this.service.repo.findOneById(id);
+
+    if (!post) {
+      throw new NotFoundException('Post Not Found');
+    }
+
+    return plainToClass(PostDetailDto, post);
   }
 }

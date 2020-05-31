@@ -9,18 +9,8 @@ export const PostSchema = {
     content: { type: 'string' },
     user: UserSchema,
     comments: { ...CommentSchema, type: 'array' },
-    createdAt: { type: 'string' },
-    updatedAt: { type: 'string' },
   },
-  required: [
-    'id',
-    'title',
-    'content',
-    'user',
-    'comments',
-    'createdAt',
-    'updatedAt',
-  ],
+  required: ['id', 'title', 'content', 'user', 'comments'],
 };
 
 export default PostSchema;
